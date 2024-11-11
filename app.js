@@ -1,63 +1,82 @@
-// 서버에서 사용자 목록을 가져오는 함수
-async function fetchUsers() {
+// app.js
+
+// 강의 목록을 가져오는 함수
+async function fetchLectures() {
     try {
-        const response = await fetch('https://tempserver-production-fe91.up.railway.app/users');  // 실제 서버 주소로 변경
+        // 서버에서 강의 목록을 받아옴
+        const response = await fetch('https://tempserver-production-fe91.up.railway.app/lectures'); // 실제 API URL
         if (!response.ok) {
             throw new Error('서버 응답 오류');
         }
 
-        const users = await response.json();
-        console.log('받은 사용자 데이터:', users);  // 콘솔에서 받은 데이터 확인
+        const lectures = await response.json();
+        const lectureList = document.getElementById('lecture-list');
+        lectureList.innerHTML = '';  // 기존 내용 초기화
 
-        const userList = document.getElementById('user-list');
-        userList.innerHTML = '';  // 기존 내용 초기화
-
-        if (users.length === 0) {
-            userList.innerHTML = '<p>사용자 데이터가 없습니다.</p>';
+        if (lectures.length === 0) {
+            lectureList.innerHTML = '<p>강의 데이터가 없습니다.</p>';
         } else {
-            users.forEach(user => {
-                const userItem = document.createElement('li');
-                userItem.textContent = `ID: ${user.id}, Name: ${user.name}, Email: ${user.email}`;
-                userList.appendChild(userItem);
+            lectures.forEach(lecture => {
+                const lectureItem = document.createElement('li');
+                lectureItem.classList.add('lecture-item');
+
+                const content = document.createElement('div');
+                content.textContent = `강의 내용: ${lecture.content}`;
+
+                const link = document.createElement('a');
+                link.href = lecture.link;
+                link.textContent = '강의 링크';
+                link.target = "_blank";
+
+                const rating = document.createElement('div');
+                rating.textContent = `별점: ${'★'.repeat(lecture.star)}${'☆'.repeat(5 - lecture.star)}`;
+
+                const good = document.createElement('div');
+                good.textContent = `좋아요: ${lecture.good}`;
+
+                const likeButton = document.createElement('button');
+                likeButton.textContent = '좋아요 추가';
+                likeButton.onclick = () => addLike(lecture.id);
+
+                lectureItem.appendChild(content);
+                lectureItem.appendChild(link);
+                lectureItem.appendChild(rating);
+                lectureItem.appendChild(good);
+                lectureItem.appendChild(likeButton);
+
+                lectureList.appendChild(lectureItem);
             });
         }
     } catch (error) {
-        console.error('데이터를 가져오는 중 오류 발생:', error);
-        const userList = document.getElementById('user-list');
-        userList.innerHTML = '<p>사용자 목록을 불러오는 데 실패했습니다.</p>';
+        console.error('강의 목록을 가져오는 중 오류 발생:', error);
+        const lectureList = document.getElementById('lecture-list');
+        lectureList.innerHTML = '<p>강의 목록을 불러오는 데 실패했습니다.</p>';
     }
 }
 
-// 사용자를 추가하는 함수
-async function addUser(event) {
-    event.preventDefault();  // 폼이 제출되지 않도록 방지
-
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-
+// 좋아요 수 증가 함수
+async function addLike(lectureId) {
     try {
-        const response = await fetch('https://tempserver-production-fe91.up.railway.app/users', {
-            method: 'POST',
+        const response = await fetch('https://tempserver-production-fe91.up.railway.app/lectures', {
+            method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, email })
+            body: JSON.stringify({ id: lectureId }),
         });
 
         if (!response.ok) {
-            throw new Error('사용자 추가 오류');
+            throw new Error('좋아요 추가 실패');
         }
 
-        alert('사용자가 추가되었습니다!');
-        fetchUsers();  // 사용자 목록을 다시 불러옴
+        // 좋아요 추가 성공 후 목록 새로 고침
+        alert('좋아요가 추가되었습니다.');
+        fetchLectures();
     } catch (error) {
-        console.error('사용자 추가 중 오류 발생:', error);
-        alert('사용자 추가에 실패했습니다.');
+        console.error('좋아요 추가 중 오류 발생:', error);
+        alert('좋아요 추가 실패');
     }
 }
 
-// 페이지가 로드되면 사용자 목록을 가져옴
-window.onload = fetchUsers;
-
-// 폼 제출 이벤트 리스너 추가
-document.getElementById('add-user-form').addEventListener('submit', addUser);
+// 페이지 로드 시 강의 목록을 가져오는 함수 호출
+document.addEventListener('DOMContentLoaded', fetchLectures);
