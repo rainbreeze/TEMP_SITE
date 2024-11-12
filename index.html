@@ -4,36 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>강의 목록</title>
+    <title>Lecture List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-    <h1>강의 목록</h1>
+    <header>
+        <h1>Lecture List</h1>
+    </header>
+
+    <!-- 강의 목록 섹션 -->
+    <section id="lectureSection">
+        <div class="lecture-list">
+            <h2>Lecture 1 (객체지향)</h2>
+            <ul id="lectureList1" class="lecture-items"></ul>
+        </div>
+
+        <div class="lecture-list">
+            <h2>Lecture 2 (UML)</h2>
+            <ul id="lectureList2" class="lecture-items"></ul>
+        </div>
+
+        <div class="lecture-list">
+            <h2>Lecture 3 (SCRUM)</h2>
+            <ul id="lectureList3" class="lecture-items"></ul>
+        </div>
+
+        <div class="lecture-list">
+            <h2>Lecture 4 (XP)</h2>
+            <ul id="lectureList4" class="lecture-items"></ul>
+        </div>
+    </section>
 
     <!-- 강의 추가 폼 -->
-    <div id="add-lecture-form">
-        <h2>강의 추가</h2>
-        <label for="lecturenumber">강의 번호:</label>
-        <input type="text" id="lecturenumber" placeholder="강의 번호">
-        <br>
-        <label for="content">강의 내용:</label>
-        <input type="text" id="content" placeholder="강의 내용">
-        <br>
-        <label for="link">강의 링크:</label>
-        <input type="text" id="link" placeholder="강의 링크">
-        <br>
-        <label for="star">별점:</label>
-        <input type="number" id="star" min="1" max="5" placeholder="별점">
-        <br>
-        <label for="good">좋아요 수:</label>
-        <input type="number" id="good" value="0" min="0" placeholder="좋아요 수">
-        <br>
-        <button id="add-lecture-btn">강의 추가</button>
-    </div>
-
-    <!-- 강의 목록 리스트 -->
-    <ul id="lecture-list"></ul>
+    <section id="addLectureSection">
+        <h2>Add New Lecture</h2>
+        <form id="addLectureForm">
+            <label for="lecturenumber">Lecture Number:</label>
+            <input type="number" id="lecturenumber" name="lecturenumber" required min="1" max="4">
+            <br>
+            <label for="content">Content:</label>
+            <input type="text" id="content" name="content" required>
+            <br>
+            <label for="link">Link:</label>
+            <input type="text" id="link" name="link" required>
+            <br>
+            <label for="star">Rating (1-5):</label>
+            <input type="number" id="star" name="star" required min="1" max="5">
+            <br>
+            <label for="good">Likes:</label>
+            <input type="number" id="good" name="good" required min="0">
+            <br>
+            <button type="submit" id="add-lecture-btn">Add Lecture</button>
+        </form>
+    </section>
 
     <script src="app.js"></script>
 </body>

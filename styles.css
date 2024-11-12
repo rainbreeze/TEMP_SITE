@@ -1,58 +1,173 @@
 /* 기본 스타일 */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fa;
-    padding: 20px;
+    font-family: 'Jua', sans-serif;
     margin: 0;
-}
-
-/* 제목 스타일 */
-h1 {
-    text-align: center;
-    font-size: 2em;
+    padding: 0;
+    background-color: #f4f7fc;
     color: #333;
-    margin-bottom: 20px;
 }
 
-/* 강의 리스트 스타일 */
-#lecture-list {
+/* 헤더 스타일 */
+header {
+    background-color: #6c5ce7;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 36px;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* 강의 목록 섹션 */
+#lectureSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px;
+    gap: 20px;
+}
+
+.lecture-list {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 48%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.lecture-list:hover {
+    transform: scale(1.05);
+}
+
+.lecture-items {
     list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
-/* 각 강의 항목 카드 스타일 */
 .lecture-item {
-    background-color: #fff;
-    margin-bottom: 15px;
+    background-color: #f9f9f9;
     padding: 20px;
+    margin: 10px 0;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none; /* 링크 스타일 기본 제거 */
+    transition: background-color 0.3s ease;
 }
 
-/* 마우스 오버 시 카드 확대 */
 .lecture-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    background-color: #f1f1f1;
 }
 
-/* 버튼 스타일 (공통) */
+.lecture-item .lecture-number {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #6c5ce7;
+}
+
+.lecture-item .lecture-content,
+.lecture-item .lecture-link,
+.lecture-item .lecture-rating,
+.lecture-item .lecture-good {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.lecture-item .lecture-link a {
+    color: #6c5ce7;
+    text-decoration: none;
+}
+
+.lecture-item .lecture-link a:hover {
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
 button {
-    background-color: #3498db;
+    background-color: #6c5ce7;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 8px 15px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 1em;
-    margin: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
-/* 버튼 호버 효과 */
 button:hover {
-    background-color: #2980b9;
+    background-color: #5e44d4;
 }
 
-/* 강의 링크 스타일 */
+/* 폼 스타일 */
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    margin: 40px auto;
+}
+
+form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    border-color: #6c5ce7;
+    outline: none;
+}
+
+input[type="number"] {
+    width: auto;
+}
+
+/* Submit 버튼 스타일 */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #5e44d4;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    #lectureSection {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .lecture-list {
+        width: 100%;
+    }
+}
