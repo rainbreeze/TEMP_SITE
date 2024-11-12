@@ -1,6 +1,3 @@
-// app.js
-
-// 강의 목록을 가져오는 함수
 async function fetchLectures() {
     try {
         // 서버에서 강의 목록을 받아옴
@@ -17,33 +14,52 @@ async function fetchLectures() {
             lectureList.innerHTML = '<p>강의 데이터가 없습니다.</p>';
         } else {
             lectures.forEach(lecture => {
-                const lectureItem = document.createElement('li');
+                // 각 강의 항목을 <a> 태그로 감싸서 클릭 시 링크로 이동하도록 만듦
+                const lectureItem = document.createElement('a');
+                lectureItem.href = lecture.link; // 강의 링크로 이동
                 lectureItem.classList.add('lecture-item');
+                lectureItem.target = "_blank"; // 새 탭에서 열리게 설정
+                lectureItem.style.textDecoration = 'none'; // 링크 기본 스타일 제거
 
+                // 강의 번호 표시
+                const lectureNumber = document.createElement('div');
+                lectureNumber.classList.add('lecture-number');
+                lectureNumber.textContent = `강의 번호: ${lecture.lecturenumber}`;
+
+                // 강의 내용 표시
                 const content = document.createElement('div');
+                content.classList.add('lecture-content');
                 content.textContent = `강의 내용: ${lecture.content}`;
 
-                const link = document.createElement('a');
-                link.href = lecture.link;
-                link.textContent = '강의 링크';
-                link.target = "_blank";
+                // 강의 링크 표시 (직접 텍스트로 보여줌)
+                const linkContent = document.createElement('div');
+                linkContent.classList.add('lecture-link');
+                linkContent.textContent = `강의 링크: ${lecture.link}`;
 
+                // 별점 표시
                 const rating = document.createElement('div');
+                rating.classList.add('lecture-rating');
                 rating.textContent = `별점: ${'★'.repeat(lecture.star)}${'☆'.repeat(5 - lecture.star)}`;
 
+                // 좋아요 수 표시
                 const good = document.createElement('div');
+                good.classList.add('lecture-good');
                 good.textContent = `좋아요: ${lecture.good}`;
 
+                // 좋아요 추가 버튼
                 const likeButton = document.createElement('button');
                 likeButton.textContent = '좋아요 추가';
                 likeButton.onclick = () => addLike(lecture.id);
 
-                lectureItem.appendChild(content);
-                lectureItem.appendChild(link);
-                lectureItem.appendChild(rating);
-                lectureItem.appendChild(good);
-                lectureItem.appendChild(likeButton);
+                // 강의 항목에 모든 요소 추가
+                lectureItem.appendChild(lectureNumber);  // 강의 번호
+                lectureItem.appendChild(content);        // 강의 내용
+                lectureItem.appendChild(linkContent);    // 강의 링크
+                lectureItem.appendChild(rating);         // 별점
+                lectureItem.appendChild(good);           // 좋아요 수
+                lectureItem.appendChild(likeButton);     // 좋아요 추가 버튼
 
+                // 리스트에 강의 항목 추가
                 lectureList.appendChild(lectureItem);
             });
         }
@@ -53,6 +69,9 @@ async function fetchLectures() {
         lectureList.innerHTML = '<p>강의 목록을 불러오는 데 실패했습니다.</p>';
     }
 }
+
+
+
 
 // 좋아요 수 증가 함수
 async function addLike(lectureId) {

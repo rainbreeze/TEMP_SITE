@@ -1,35 +1,87 @@
-/* styles.css */
+/* 기본 스타일 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
     padding: 20px;
+    margin: 0;
 }
 
+/* 제목 스타일 */
 h1 {
     text-align: center;
+    font-size: 2em;
+    color: #333;
     margin-bottom: 20px;
 }
 
+/* 강의 리스트 스타일 */
 #lecture-list {
     list-style-type: none;
     padding: 0;
-}
-
-.lecture-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.lecture-item h3 {
     margin: 0;
-    font-size: 1.2em;
 }
 
-.lecture-item a {
+/* 각 강의 항목 카드 스타일 */
+.lecture-item {
+    display: block;  /* <a> 태그가 블록으로 동작하도록 설정 */
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* 링크 스타일 기본 제거 */
+}
+
+/* 마우스 오버 시 카드 확대 */
+.lecture-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 강의 번호 스타일 */
+.lecture-number {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* 강의 내용 */
+.lecture-content {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+/* 강의 링크 스타일 */
+.lecture-link {
+    font-size: 1em;
     color: #3498db;
+    text-decoration: none;
+    margin-bottom: 12px;
+    display: inline-block;
 }
 
+/* 강의 링크 호버 스타일 */
+.lecture-link:hover {
+    text-decoration: underline;
+}
+
+/* 별점 표시 */
+.lecture-rating {
+    font-size: 1.1em;
+    color: #f39c12;
+    margin-bottom: 8px;
+}
+
+/* 좋아요 수 표시 */
+.lecture-good {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* 좋아요 버튼 스타일 */
 button {
     background-color: #3498db;
     color: white;
@@ -37,8 +89,10 @@ button {
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 1em;
 }
 
+/* 좋아요 버튼 호버 효과 */
 button:hover {
     background-color: #2980b9;
 }
