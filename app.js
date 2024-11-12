@@ -1,7 +1,7 @@
+// 강의 목록을 가져오는 함수
 async function fetchLectures() {
     try {
-        // 서버에서 강의 목록을 받아옴
-        const response = await fetch('https://tempserver-production-fe91.up.railway.app/lectures'); // 실제 API URL
+        const response = await fetch('https://tempserver-production-fe91.up.railway.app/lectures');
         if (!response.ok) {
             throw new Error('서버 응답 오류');
         }
@@ -14,52 +14,39 @@ async function fetchLectures() {
             lectureList.innerHTML = '<p>강의 데이터가 없습니다.</p>';
         } else {
             lectures.forEach(lecture => {
-                // 각 강의 항목을 <a> 태그로 감싸서 클릭 시 링크로 이동하도록 만듦
-                const lectureItem = document.createElement('a');
-                lectureItem.href = lecture.link; // 강의 링크로 이동
+                const lectureItem = document.createElement('li');
                 lectureItem.classList.add('lecture-item');
-                lectureItem.target = "_blank"; // 새 탭에서 열리게 설정
-                lectureItem.style.textDecoration = 'none'; // 링크 기본 스타일 제거
 
-                // 강의 번호 표시
-                const lectureNumber = document.createElement('div');
-                lectureNumber.classList.add('lecture-number');
-                lectureNumber.textContent = `강의 번호: ${lecture.lecturenumber}`;
+                // 강의 내용
+                const contentDiv = document.createElement('div');
+                contentDiv.innerHTML = `
+                    <div class="lecture-number">강의 번호: ${lecture.lecturenumber}</div>
+                    <div class="lecture-content">강의 내용: ${lecture.content}</div>
+                    <div class="lecture-link">강의 링크: ${lecture.link}</div>
+                    <div class="lecture-rating">별점: ${'★'.repeat(lecture.star)}${'☆'.repeat(5 - lecture.star)}</div>
+                    <div class="lecture-good">좋아요: ${lecture.good}</div>
+                `;
+                lectureItem.appendChild(contentDiv);
 
-                // 강의 내용 표시
-                const content = document.createElement('div');
-                content.classList.add('lecture-content');
-                content.textContent = `강의 내용: ${lecture.content}`;
-
-                // 강의 링크 표시 (직접 텍스트로 보여줌)
-                const linkContent = document.createElement('div');
-                linkContent.classList.add('lecture-link');
-                linkContent.textContent = `강의 링크: ${lecture.link}`;
-
-                // 별점 표시
-                const rating = document.createElement('div');
-                rating.classList.add('lecture-rating');
-                rating.textContent = `별점: ${'★'.repeat(lecture.star)}${'☆'.repeat(5 - lecture.star)}`;
-
-                // 좋아요 수 표시
-                const good = document.createElement('div');
-                good.classList.add('lecture-good');
-                good.textContent = `좋아요: ${lecture.good}`;
+                // 바로 가기 버튼 (링크로 이동)
+                const goToLinkButton = document.createElement('button');
+                goToLinkButton.textContent = '바로 가기';
+                goToLinkButton.onclick = () => window.open(lecture.link, '_blank');  // 링크 새 탭에서 열기
+                lectureItem.appendChild(goToLinkButton);  // 강의 항목에 바로 가기 버튼 추가
 
                 // 좋아요 추가 버튼
                 const likeButton = document.createElement('button');
                 likeButton.textContent = '좋아요 추가';
-                likeButton.onclick = () => addLike(lecture.id);
+                likeButton.onclick = () => addLike(lecture.id); // 좋아요 추가 시 해당 강의에 대한 좋아요 추가
+                lectureItem.appendChild(likeButton);  // 강의 항목에 좋아요 버튼 추가
 
-                // 강의 항목에 모든 요소 추가
-                lectureItem.appendChild(lectureNumber);  // 강의 번호
-                lectureItem.appendChild(content);        // 강의 내용
-                lectureItem.appendChild(linkContent);    // 강의 링크
-                lectureItem.appendChild(rating);         // 별점
-                lectureItem.appendChild(good);           // 좋아요 수
-                lectureItem.appendChild(likeButton);     // 좋아요 추가 버튼
+                // 삭제 버튼
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '강의 삭제';
+                deleteButton.onclick = () => deleteLecture(lecture.id); // 삭제 버튼 클릭 시 해당 강의 삭제
+                lectureItem.appendChild(deleteButton);  // 강의 항목에 삭제 버튼 추가
 
-                // 리스트에 강의 항목 추가
+                // 강의 항목을 리스트에 추가
                 lectureList.appendChild(lectureItem);
             });
         }
@@ -70,32 +57,72 @@ async function fetchLectures() {
     }
 }
 
-
-
+// 강의 삭제 함수
+async function deleteLecture(lectureId) {
+    const response = await fetch(`https://tempserver-production-fe91.up.railway.app/lectures/${lectureId}`, { method: 'DELETE' });
+    if (response.ok) {
+        alert('강의가 삭제되었습니다.');
+        fetchLectures();  // 목록 새로 고침
+    } else {
+        alert('강의 삭제 실패');
+    }
+}
 
 // 좋아요 수 증가 함수
 async function addLike(lectureId) {
-    try {
-        const response = await fetch('https://tempserver-production-fe91.up.railway.app/lectures', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: lectureId }),
-        });
+    const response = await fetch('https://tempserver-production-fe91.up.railway.app/lectures', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: lectureId })
+    });
 
-        if (!response.ok) {
-            throw new Error('좋아요 추가 실패');
-        }
-
-        // 좋아요 추가 성공 후 목록 새로 고침
+    if (response.ok) {
         alert('좋아요가 추가되었습니다.');
-        fetchLectures();
-    } catch (error) {
-        console.error('좋아요 추가 중 오류 발생:', error);
+        fetchLectures();  // 목록 새로 고침
+    } else {
         alert('좋아요 추가 실패');
+    }
+}
+
+// 강의 추가 함수
+async function addLecture() {
+    const lecturenumber = document.getElementById('lecturenumber').value;
+    const content = document.getElementById('content').value;
+    const link = document.getElementById('link').value;
+    const star = document.getElementById('star').value;
+    const good = document.getElementById('good').value; // 좋아요 수
+
+    if (!lecturenumber || !content || !link || !star) {
+        alert('모든 필드를 입력하세요.');
+        return;
+    }
+
+    const newLecture = {
+        lecturenumber: lecturenumber,
+        content: content,
+        link: link,
+        star: parseInt(star, 10),
+        good: parseInt(good, 10),  // 좋아요 수도 포함
+    };
+
+    const response = await fetch('https://tempserver-production-fe91.up.railway.app/lectures', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newLecture),
+    });
+
+    if (response.ok) {
+        alert('강의가 추가되었습니다.');
+        fetchLectures();  // 강의 목록 갱신
+    } else {
+        alert('강의 추가 실패');
     }
 }
 
 // 페이지 로드 시 강의 목록을 가져오는 함수 호출
 document.addEventListener('DOMContentLoaded', fetchLectures);
+
+// 강의 추가 버튼 클릭 시
+document.getElementById('add-lecture-btn').addEventListener('click', addLecture);

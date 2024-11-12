@@ -5,15 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>강의 목록</title>
-    <!-- 외부 CSS 파일을 링크합니다. -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <h1>강의 목록</h1>
+
+    <!-- 강의 추가 폼 -->
+    <div id="add-lecture-form">
+        <h2>강의 추가</h2>
+        <label for="lecturenumber">강의 번호:</label>
+        <input type="text" id="lecturenumber" placeholder="강의 번호">
+        <br>
+        <label for="content">강의 내용:</label>
+        <input type="text" id="content" placeholder="강의 내용">
+        <br>
+        <label for="link">강의 링크:</label>
+        <input type="text" id="link" placeholder="강의 링크">
+        <br>
+        <label for="star">별점:</label>
+        <input type="number" id="star" min="1" max="5" placeholder="별점">
+        <br>
+        <label for="good">좋아요 수:</label>
+        <input type="number" id="good" value="0" min="0" placeholder="좋아요 수">
+        <br>
+        <button id="add-lecture-btn">강의 추가</button>
+    </div>
+
+    <!-- 강의 목록 리스트 -->
     <ul id="lecture-list"></ul>
 
-    <!-- 외부 JS 파일을 링크합니다. -->
     <script src="app.js"></script>
 </body>
 
