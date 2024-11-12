@@ -1,0 +1,94 @@
+/* 전체 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전체 페이지 스타일 */
+body {
+    font-family: 'Jua', sans-serif;
+    background-color: #f4f4f9; /* 부드러운 배경색 */
+    height: 100vh; /* 전체 페이지 높이를 100%로 설정 */
+    display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    justify-content: center; /* 가운데 배치 */
+    align-items: center;
+}
+
+/* 컨테이너 스타일 */
+.container {
+    width: 100%;
+    max-width: 900px; /* 최대 너비 설정 */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 상단 좌측: SWENG2024 */
+#header-left {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+/* 상단 우측: 멘토, 멘티, 교수 버튼 */
+#header-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+#header-right button {
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#header-right button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px); /* 위로 떠오르는 효과 */
+}
+
+/* 하단: 3행 2열로 나열된 버튼들 */
+#buttons-bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2개의 열로 배치 */
+    gap: 20px;
+    width: 100%;
+}
+
+#buttons-bottom button {
+    padding: 20px 30px; /* 버튼 크기 조정 */
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 3px; /* 둥근 모서리 */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#buttons-bottom button:hover {
+    background-color: #0b7dda;
+    transform: translateY(-5px); /* 위로 떠오르는 효과 */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* 더 큰 그림자 */
+}

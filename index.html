@@ -1,66 +1,40 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecture List</title>
+    <title>Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="home.css">
 </head>
-
 <body>
-    <der>
-        <h1>Lecture List</h1>
-    </der>
 
-    <!-- 강의 목록 섹션 -->
-    <section id="lectureSection">
-        <div class="lecture-list">
-            <h2>Lecture 1 (객체지향)</h2>
-            <ul id="lectureList1" class="lecture-items"></ul>
-        </div>
+    <div class="container">
+        <!-- 상단 좌측: SWENG2024 텍스트 -->
+        <section id="header-left">
+            <span>SWENG2024</span>
+        </section>
 
-        <div class="lecture-list">
-            <h2>Lecture 2 (UML)</h2>
-            <ul id="lectureList2" class="lecture-items"></ul>
-        </div>
+        <!-- 상단 우측: 멘토, 멘티, 교수 버튼 -->
+        <section id="header-right">
+            <button onclick="redirectToPage('lecture/lecture.html')">멘토</button>
+            <button onclick="redirectToPage('lecture/lecture.html')">멘티</button>
+            <button onclick="redirectToPage('lecture/lecture.html')">교수</button>
+        </section>
 
-        <div class="lecture-list">
-            <h2>Lecture 3 (SCRUM)</h2>
-            <ul id="lectureList3" class="lecture-items"></ul>
-        </div>
+        <!-- 하단: 3행 2열로 나열된 버튼들 -->
+        <section id="buttons-bottom">
+            <button onclick="redirectToPage('lecture/lecture.html')">유익한 포스팅 자료</button>
+            <button onclick="redirectToPage('lecture/lecture2.html')">유익한 영상 자료</button>
+            <button onclick="redirectToPage('lecture/lecture3.html')">수업 메모 공유</button>
+            <button onclick="redirectToPage('lecture/lecture4.html')">시험/과제 정보</button>
+            <button onclick="redirectToPage('lecture/lecture5.html')">#</button>
+            <button onclick="redirectToPage('lecture/lecture6.html')">#</button>
+        </section>
+    </div>
 
-        <div class="lecture-list">
-            <h2>Lecture 4 (XP)</h2>
-            <ul id="lectureList4" class="lecture-items"></ul>
-        </div>
-    </section>
-
-    <!-- 강의 추가 폼 -->
-    <section id="addLectureSection">
-        <h2>Add New Lecture</h2>
-        <form id="addLectureForm">
-            <label for="lecturenumber">Lecture Number:</label>
-            <input type="number" id="lecturenumber" name="lecturenumber" required min="1" max="4">
-            <br>
-            <label for="content">Content:</label>
-            <input type="text" id="content" name="content" required>
-            <br>
-            <label for="link">Link:</label>
-            <input type="text" id="link" name="link" required>
-            <br>
-            <label for="star">Rating (1-5):</label>
-            <input type="number" id="star" name="star" required min="1" max="5">
-            <br>
-            <button type="submit" id="add-lecture-btn">Add Lecture</button>
-        </form>
-    </section>
-
-    <script src="app.js"></script>
+    <script src="home.js"></script>
 </body>
-
 </html>
