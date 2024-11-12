@@ -177,3 +177,7 @@ button[type="submit"]:hover {
         width: 100%;
     }
 }
+/* 기본적으로 버튼을 숨깁니다 */
+.delete-lecture-btn, .like-lecture-btn {
+    display: none;
+}
