@@ -17,29 +17,34 @@ header {
 }
 
 h1 {
+    text-align: center;
     font-size: 36px;
     margin: 0;
+    margin-top: 50px;
     font-weight: 600;
 }
 
-/* 강의 목록 섹션 */
+h2 {
+    text-align: center;
+}
+/* 강의 목록 섹션 - 2행 2열로 배치 */
 #lectureSection {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 2열로 설정 */
+    grid-gap: 20px;  /* 항목 간 간격 */
     padding: 30px;
-    gap: 20px;
 }
 
+/* 각 강의 목록 스타일 */
 .lecture-list {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
-    width: 48%;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
 }
 
+/* Hover 효과 */
 .lecture-list:hover {
     transform: scale(1.05);
 }
@@ -49,6 +54,7 @@ h1 {
     padding: 0;
 }
 
+/* 강의 항목 스타일 */
 .lecture-item {
     background-color: #f9f9f9;
     padding: 20px;
@@ -163,7 +169,7 @@ button[type="submit"]:hover {
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     #lectureSection {
-        flex-direction: column;
+        grid-template-columns: 1fr;  /* 모바일에서는 1열로 변경 */
         padding: 20px;
     }
 
