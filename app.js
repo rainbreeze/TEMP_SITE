@@ -33,9 +33,9 @@ async function fetchLectures() {
                 // 강의 내용
                 const contentDiv = document.createElement('div');
                 contentDiv.innerHTML = `
-                    <div class="lecture-number">강의 번호: ${lecture.lecturenumber}</div>
-                    <div class="lecture-content">강의 내용: ${lecture.content}</div>
-                    <div class="lecture-link">강의 링크: <a href="${lecture.link}" target="_blank">${lecture.link}</a></div>
+                    <div class="lecture-number">Lecture: ${lecture.lecturenumber}</div>
+                    <div class="lecture-content">포스팅 내용: ${lecture.content}</div>
+                    <div class="lecture-link">포스팅 링크: <a href="${lecture.link}" target="_blank">${lecture.link}</a></div>
                     <div class="lecture-rating">별점: ${'★'.repeat(lecture.star)}${'☆'.repeat(5 - lecture.star)}</div>
                     <div class="lecture-good">좋아요: ${lecture.good}</div>
                 `;
@@ -99,6 +99,7 @@ async function addLike(lectureId) {
 }
 
 // 강의 추가 함수
+// 강의 추가 함수
 async function addLecture(event) {
     event.preventDefault(); // 기본 폼 제출 방지
 
@@ -106,12 +107,14 @@ async function addLecture(event) {
     const content = document.getElementById('content').value;
     const link = document.getElementById('link').value;
     const star = parseInt(document.getElementById('star').value);
-    const good = parseInt(document.getElementById('good').value);
 
-    if (!lecturenumber || !content || !link || !star || !good) {
+    if (!lecturenumber || !content || !link || !star) {
         alert("모든 필드를 채워주세요.");
         return;
     }
+
+    // "좋아요" 값을 0으로 고정
+    const good = 0;
 
     const newLecture = {
         lecturenumber: parseInt(lecturenumber),
