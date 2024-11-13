@@ -33,8 +33,8 @@ async function updateButtonsVisibility() {
         const deleteButtons = document.querySelectorAll('.delete-lecture-btn');
         const likeButtons = document.querySelectorAll('.like-lecture-btn');
 
-        deleteButtons.forEach(btn => btn.style.display = 'block');  // 모든 삭제 버튼 보이기
-        likeButtons.forEach(btn => btn.style.display = 'block');  // 모든 좋아요 버튼 보이기
+        deleteButtons.forEach(btn => btn.style.display = 'inline-block');  // 모든 삭제 버튼 보이기
+        likeButtons.forEach(btn => btn.style.display = 'inline-block');  // 모든 좋아요 버튼 보이기
     }
 }
 

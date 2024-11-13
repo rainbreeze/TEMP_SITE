@@ -180,5 +180,6 @@ button[type="submit"]:hover {
 /* 기본적으로 버튼을 숨깁니다 */
 .delete-lecture-btn, .like-lecture-btn, .addLectureSection {
     display: none;
+    margin-right: 10px;
 }
 
