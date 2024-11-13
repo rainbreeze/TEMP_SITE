@@ -11,6 +11,11 @@ async function updateButtonsVisibility() {
         // '멘티'일 경우 좋아요 버튼 보이기
         const likeButtons = document.querySelectorAll('.like-lecture-btn');
         likeButtons.forEach(btn => btn.style.display = 'block');  // 좋아요 버튼 보이기
+                // '멘티'일 경우 강의 추가 섹션 숨기기
+        const addLectureSection = document.getElementById('addLectureSection');
+        if (addLectureSection) {
+            addLectureSection.style.display = 'none';  // '멘티'일 때 강의 추가 섹션 숨기기
+        }
     }
 
     // '멘토'일 경우 좋아요 버튼 숨기기
