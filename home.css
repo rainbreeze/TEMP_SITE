@@ -8,7 +8,8 @@
 /* 전체 페이지 스타일 */
 body {
     font-family: 'Jua', sans-serif;
-    background-color: #f4f4f9; /* 부드러운 배경색 */
+    background-color: #f4f7fc;  /* 부드러운 배경색 */
+    color: #333;
     height: 100vh; /* 전체 페이지 높이를 100%로 설정 */
     display: flex;
     flex-direction: column; /* 세로로 배치 */
@@ -20,7 +21,7 @@ body {
 .container {
     width: 100%;
     max-width: 900px; /* 최대 너비 설정 */
-    background-color: #fff;
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
     padding: 20px;
@@ -34,7 +35,7 @@ body {
 #header-left {
     font-size: 28px;
     font-weight: bold;
-    color: #333;
+    color: #6c5ce7; /* 멘토 버튼과 같은 색 */
     text-align: left;
     position: absolute;
     top: 20px;
@@ -54,16 +55,16 @@ body {
     padding: 8px 15px;
     font-size: 14px;
     font-weight: bold;
-    background-color: #4CAF50;
+    background-color: #6c5ce7; /* 멘토 버튼 색상 */
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 #header-right button:hover {
-    background-color: #45a049;
+    background-color: #5e44d4; /* 호버 시 어두운 보라색 */
     transform: translateY(-3px); /* 위로 떠오르는 효과 */
 }
 
@@ -79,16 +80,31 @@ body {
     padding: 20px 30px; /* 버튼 크기 조정 */
     font-size: 16px;
     font-weight: bold;
-    background-color: #2196F3;
+    background-color: #6c5ce7; /* 멘토 버튼 색상 */
     color: white;
     border: none;
-    border-radius: 3px; /* 둥근 모서리 */
+    border-radius: 5px; /* 둥근 모서리 */
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #buttons-bottom button:hover {
-    background-color: #0b7dda;
+    background-color: #5e44d4; /* 호버 시 어두운 보라색 */
     transform: translateY(-5px); /* 위로 떠오르는 효과 */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* 더 큰 그림자 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    #buttons-bottom {
+        grid-template-columns: 1fr;  /* 모바일에서는 1열로 변경 */
+    }
+    
+    #buttons-bottom button {
+        padding: 15px 25px;  /* 버튼 크기 조정 */
+    }
+
+    #header-left, #header-right {
+        position: relative; /* 모바일에서 버튼이 겹치지 않도록 변경 */
+    }
 }
