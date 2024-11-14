@@ -43,23 +43,23 @@ function updateButtons(role) {
         buttons[0].textContent = "포스팅 자료 공유";
         buttons[1].textContent = "영상 자료 공유";
         buttons[2].textContent = "수업 메모 공유";
-        buttons[3].textContent = "시험 / 과제 정보 공유";
+        buttons[3].textContent = "시험 / 과제 공유";
         buttons[4].textContent = "상담 신청 받기";
         buttons[5].textContent = "답변 하기";
     } else if (role === 'mentee') {
         buttons[0].textContent = "포스팅 자료 보기";
         buttons[1].textContent = "영상 자료 보기";
         buttons[2].textContent = "수업 메모 보기";
-        buttons[3].textContent = "시험 / 과제 정보 얻기";
+        buttons[3].textContent = "시험 / 과제 정보";
         buttons[4].textContent = "상담 신청 하기";
         buttons[5].textContent = "질문 하기";
     } else if (role === 'professor') {
-        buttons[0].textContent = "포스팅 자료 보기/공유";
-        buttons[1].textContent = "영상 자료 보기/공유";
-        buttons[2].textContent = "수업 메모 보기/공유";
-        buttons[3].textContent = "시험 / 과제 정보 얻기/공유";
-        buttons[4].textContent = "상담 신청 하기/공유";
-        buttons[5].textContent = "질문 하기/공유";
+        buttons[0].textContent = "포스팅 자료";
+        buttons[1].textContent = "영상 자료";
+        buttons[2].textContent = "수업 메모";
+        buttons[3].textContent = "시험 / 과제";
+        buttons[4].textContent = "상담 신청 받기";
+        buttons[5].textContent = "답변 하기";
     }
 }
 
